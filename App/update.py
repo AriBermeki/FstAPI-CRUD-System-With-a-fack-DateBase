@@ -5,14 +5,14 @@ from fastapi.routing import APIRoute, APIRouter
 from fastapi.requests import Request
 from fastapi.responses import Response
 from Database.Schema.schema import AccountSchema, NewAccountSchema
-from App.create import user
+from Database.database import database
 update_router = APIRouter()
 
 
 @update_router.post('/update_user/{user_id}', status_code=status.HTTP_202_ACCEPTED, response_model= NewAccountSchema)   
 async def update(user_id: uuid.UUID, data: AccountSchema): 
 #____________ Hier wird untersucht, ob die Output Daten gleich der Input is ______________#
-    for item in user:
+    for item in database:
         if item['id'] == user_id:
             if data.id is not None:
                 data.id = data.id

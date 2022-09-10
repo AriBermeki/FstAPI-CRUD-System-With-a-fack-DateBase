@@ -6,7 +6,7 @@ from fastapi.requests import Request
 from fastapi.responses import Response
 from Database.Schema.schema import AccountSchema
 from Database.Schema.schema import AccountSchema
-from App.create import user
+from Database.database import database
 
 delete_router = APIRouter()
 
@@ -17,9 +17,9 @@ async def delete(user_id: uuid.UUID):
 #____________ Hier wird untersucht, ob die Output ID gleich der Input ID ist, wenn ja, dann wird die daten aus der Daten Bank gelöscht, wenn nicht wird eine Fehle zurück gegeben , dass diese eingegebene ID nicht exestiert ist______________#
 
 
-    for x,item in enumerate(user):
+    for x,item in enumerate(database):
         if item['id'] == user_id:
-            user.pop(x)
+            database.pop(x)
             return
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,

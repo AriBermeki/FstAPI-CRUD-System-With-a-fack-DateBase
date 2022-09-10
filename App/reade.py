@@ -6,7 +6,7 @@ from fastapi.routing import APIRoute, APIRouter
 from fastapi.requests import Request
 from fastapi.responses import Response
 from Database.Schema.schema import AccountSchema
-from App.create import user
+from Database.database import database
 
 reade_router = APIRouter()
 
@@ -15,7 +15,7 @@ reade_router = APIRouter()
 #____________ Hier wird alle daten in der Daten Bank  zurück gegeben ______________#
 async def reade():
     
-    return user
+    return database
     
 
 
@@ -24,7 +24,7 @@ async def reade(user_id: uuid.UUID):
 
 #____________ Hier wird untersucht, ob die Output ID gleich der Input ID ist, wenn ja, dann wird die daten gezeigt, wenn nicht wird eine Fehle zurück gegeben ______________#
 
-    for item in user:
+    for item in database:
         if item['id'] == user_id:
             return item
     raise HTTPException(

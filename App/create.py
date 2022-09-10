@@ -5,12 +5,13 @@ from fastapi.routing import APIRouter
 from fastapi import Depends, HTTPException, status
 
 from Database.Schema.schema import AccountSchema
+from Database.database import database
 
 # from Database.Models.models import Accounts
 
 create_router = APIRouter()
 
-user = []
+
 
 
 @create_router.post('/new_user', response_model=AccountSchema, status_code=status.HTTP_201_CREATED)
@@ -28,5 +29,5 @@ async def create(accounts: AccountSchema):
     new_user['role'] = new_user['role']
     new_user['priority'] = new_user['priority']
     new_user['status'] = new_user['status']
-    user.append(new_user)
+    database.append(new_user)
     return new_user
